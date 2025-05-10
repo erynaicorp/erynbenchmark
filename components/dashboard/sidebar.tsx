@@ -40,7 +40,13 @@ export default function DashboardSidebar({ isOpen }: SidebarProps) {
       {/* Logo */}
       <div className="flex h-16 items-center border-b border-gray-200 px-4">
         <div className="flex items-center">
-          <Image src="/eryn-logo.png" alt="Eryn Logo" width={32} height={32} className="h-8 w-8" />
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FNqZaBmsvQivyiPfCeOKaxOANsN8QB.png"
+            alt="Eryn Logo"
+            width={40}
+            height={40}
+            className="h-8 w-auto"
+          />
           <span className="ml-2 text-xl font-semibold text-gray-900">eryn</span>
         </div>
       </div>

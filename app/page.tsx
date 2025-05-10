@@ -41,7 +41,13 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="mb-6 flex justify-center">
-            <Image src="/eryn-logo.png" alt="Eryn Logo" width={80} height={80} className="h-16 w-16" />
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FNqZaBmsvQivyiPfCeOKaxOANsN8QB.png"
+              alt="Eryn Logo"
+              width={80}
+              height={80}
+              className="h-16 w-auto"
+            />
           </div>
 
           <div className="text-center">
