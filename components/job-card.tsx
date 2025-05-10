@@ -1,14 +1,19 @@
+"use client"
+
 import { DollarSign, Briefcase, MapPin, Building, Clock } from "lucide-react"
-import Link from "next/link"
 import type { JobData } from "@/data/job-data"
 
 interface JobCardProps {
   job: JobData
+  onClick: () => void
 }
 
-export default function JobCard({ job }: JobCardProps) {
+export default function JobCard({ job, onClick }: JobCardProps) {
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md">
+    <div
+      className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md cursor-pointer"
+      onClick={onClick}
+    >
       <div className="p-5">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <h3 className="text-xl font-semibold text-gray-900">{job.title}</h3>
@@ -57,13 +62,16 @@ export default function JobCard({ job }: JobCardProps) {
         </div>
 
         <div className="mt-4 flex justify-end">
-          <Link
-            href={`/job/${job.id}`}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onClick()
+            }}
             className="inline-flex items-center rounded-lg bg-[#182654] px-4 py-2 text-center text-sm font-medium text-white hover:bg-[#182654]/90 focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             <DollarSign className="mr-1 h-4 w-4" />
-            View Full Details
-          </Link>
+            View Details
+          </button>
         </div>
       </div>
     </div>
