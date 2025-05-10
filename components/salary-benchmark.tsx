@@ -3,10 +3,9 @@
 import type React from "react"
 
 import { useState, useRef } from "react"
-import { Search, Briefcase, MapPin, Filter, Mic, Upload, X, BarChart2 } from "lucide-react"
+import { Search, Briefcase, MapPin, Filter, Mic, Upload, X, BarChart2, Info } from "lucide-react"
 import { benchmarkData } from "@/data/benchmark-data"
 import BenchmarkCard from "./benchmark-card"
-import CompensationFactors from "./compensation-factors"
 
 export default function SalaryBenchmark() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -22,6 +21,7 @@ export default function SalaryBenchmark() {
   const [isListening, setIsListening] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [showInfoModal, setShowInfoModal] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Get unique values for filter dropdowns
@@ -148,7 +148,16 @@ export default function SalaryBenchmark() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 md:text-4xl">Compensation Benchmarking</h1>
+        <div className="flex items-center justify-center">
+          <h1 className="text-3xl font-bold text-gray-900 md:text-4xl">Compensation Benchmarking</h1>
+          <button
+            onClick={() => setShowInfoModal(true)}
+            className="ml-2 rounded-full p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+            aria-label="Show compensation factors information"
+          >
+            <Info className="h-5 w-5" />
+          </button>
+        </div>
         <p className="mt-2 text-gray-600">
           Compare market salaries across industries, locations, and experience levels
         </p>
@@ -355,37 +364,172 @@ export default function SalaryBenchmark() {
           )}
 
           {!hasSearched && (
-            <div>
-              <div className="rounded-lg bg-gray-50 p-8 text-center">
-                <p className="text-gray-600">Enter a job title or role to find compensation benchmarks.</p>
-                <div className="mt-6 grid gap-4 text-left md:grid-cols-3">
-                  <div className="rounded-lg bg-white p-4 shadow">
-                    <Briefcase className="mb-2 h-6 w-6 text-[#182654]" />
-                    <h3 className="font-medium">Search by Role</h3>
-                    <p className="mt-1 text-sm text-gray-500">E.g., "Software Engineer", "Marketing Manager"</p>
-                  </div>
-                  <div className="rounded-lg bg-white p-4 shadow">
-                    <MapPin className="mb-2 h-6 w-6 text-[#182654]" />
-                    <h3 className="font-medium">Filter by Location</h3>
-                    <p className="mt-1 text-sm text-gray-500">Compare salaries across different regions</p>
-                  </div>
-                  <div className="rounded-lg bg-white p-4 shadow">
-                    <BarChart2 className="mb-2 h-6 w-6 text-[#182654]" />
-                    <h3 className="font-medium">Analyze Market Data</h3>
-                    <p className="mt-1 text-sm text-gray-500">View detailed compensation analytics</p>
-                  </div>
+            <div className="rounded-lg bg-gray-50 p-8 text-center">
+              <p className="text-gray-600">Enter a job title or role to find compensation benchmarks.</p>
+              <div className="mt-6 grid gap-4 text-left md:grid-cols-3">
+                <div className="rounded-lg bg-white p-4 shadow">
+                  <Briefcase className="mb-2 h-6 w-6 text-[#182654]" />
+                  <h3 className="font-medium">Search by Role</h3>
+                  <p className="mt-1 text-sm text-gray-500">E.g., "Software Engineer", "Marketing Manager"</p>
                 </div>
-              </div>
-
-              {/* Compensation Factors Section */}
-              <div className="mt-8">
-                <h2 className="mb-4 text-xl font-semibold text-gray-800">Key Compensation Factors</h2>
-                <CompensationFactors />
+                <div className="rounded-lg bg-white p-4 shadow">
+                  <MapPin className="mb-2 h-6 w-6 text-[#182654]" />
+                  <h3 className="font-medium">Filter by Location</h3>
+                  <p className="mt-1 text-sm text-gray-500">Compare salaries across different regions</p>
+                </div>
+                <div className="rounded-lg bg-white p-4 shadow">
+                  <BarChart2 className="mb-2 h-6 w-6 text-[#182654]" />
+                  <h3 className="font-medium">Analyze Market Data</h3>
+                  <p className="mt-1 text-sm text-gray-500">View detailed compensation analytics</p>
+                </div>
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {/* Information Modal */}
+      {showInfoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="max-h-[90vh] w-full max-w-4xl overflow-auto rounded-lg bg-white p-6 shadow-xl">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-gray-900">Key Compensation Factors</h2>
+              <button
+                onClick={() => setShowInfoModal(false)}
+                className="rounded-full p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                aria-label="Close modal"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-900">Geographic Location</h3>
+                <p className="text-gray-700">
+                  Salaries vary significantly by location due to cost of living differences, local market conditions,
+                  and regional talent availability. Major tech hubs like San Francisco and New York typically offer
+                  higher compensation than smaller markets.
+                </p>
+                <div className="mt-4 overflow-hidden rounded-lg bg-gray-50 p-3">
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>San Francisco, CA</span>
+                    <span className="font-medium">100% (Baseline)</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>New York, NY</span>
+                    <span className="font-medium">95-100%</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Seattle, WA</span>
+                    <span className="font-medium">90-95%</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Austin, TX</span>
+                    <span className="font-medium">80-85%</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Remote</span>
+                    <span className="font-medium">75-90%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-900">Experience Level</h3>
+                <p className="text-gray-700">
+                  Experience significantly impacts compensation, with senior roles commanding premium salaries. Career
+                  progression typically follows a non-linear growth curve, with larger increases occurring during
+                  promotions or role changes.
+                </p>
+                <div className="mt-4 overflow-hidden rounded-lg bg-gray-50 p-3">
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Entry-Level (0-2 years)</span>
+                    <span className="font-medium">40-60% of Senior</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Mid-Level (3-5 years)</span>
+                    <span className="font-medium">60-80% of Senior</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Senior (6-10 years)</span>
+                    <span className="font-medium">100% (Baseline)</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Lead/Principal (10+ years)</span>
+                    <span className="font-medium">120-150% of Senior</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-900">Industry Variations</h3>
+                <p className="text-gray-700">
+                  Compensation varies widely across industries, with technology, finance, and healthcare typically
+                  offering higher salaries than retail, education, or non-profit sectors for comparable roles and
+                  experience levels.
+                </p>
+                <div className="mt-4 overflow-hidden rounded-lg bg-gray-50 p-3">
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Technology</span>
+                    <span className="font-medium">100-120%</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Finance</span>
+                    <span className="font-medium">100-130%</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Healthcare</span>
+                    <span className="font-medium">90-110%</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Manufacturing</span>
+                    <span className="font-medium">80-100%</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Non-Profit</span>
+                    <span className="font-medium">70-85%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-900">Company Size</h3>
+                <p className="text-gray-700">
+                  Company size often correlates with compensation levels. Larger organizations typically offer higher
+                  base salaries, while startups may offer lower base pay but more equity. Mid-size companies often
+                  balance both approaches.
+                </p>
+                <div className="mt-4 overflow-hidden rounded-lg bg-gray-50 p-3">
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Startup (&lt;50 employees)</span>
+                    <span className="font-medium">80-90% base, higher equity</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Small (50-500 employees)</span>
+                    <span className="font-medium">85-95% base, moderate equity</span>
+                  </div>
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span>Mid-size (500-5,000)</span>
+                    <span className="font-medium">90-105% base, some equity</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Enterprise (5,000+)</span>
+                    <span className="font-medium">100-110% base, limited equity</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setShowInfoModal(false)}
+                className="rounded-lg bg-[#182654] px-4 py-2 text-white hover:bg-[#182654]/90"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

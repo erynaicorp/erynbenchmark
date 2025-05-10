@@ -6,8 +6,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Job Salary Finder",
-  description: "Find accurate salary information for any job position",
+  title: "Eryn - Compensation Benchmarking",
+  description: "Make data-driven compensation decisions with market-leading salary insights",
     generator: 'v0.dev'
 }
 
@@ -18,18 +18,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Add this to make the SpeechRecognition type available */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            if (!window.SpeechRecognition && window.webkitSpeechRecognition) {
-              window.SpeechRecognition = window.webkitSpeechRecognition;
-            }
-          `,
-          }}
-        />
-      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )
