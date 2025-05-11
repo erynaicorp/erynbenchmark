@@ -10,7 +10,8 @@ export default function LoginLoading() {
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
-      router.push("/dashboard")
+      // Direct to welcome dashboard instead of success page
+      router.push("/dashboard/welcome")
     }, 2000)
 
     return () => clearTimeout(timer)

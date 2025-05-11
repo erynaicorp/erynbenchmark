@@ -10,7 +10,8 @@ export default function SendingQuestionnaire() {
   useEffect(() => {
     // Simulate sending time
     const timer = setTimeout(() => {
-      router.push("/dashboard")
+      // Now direct to success page after creating a questionnaire
+      router.push("/dashboard/success")
     }, 2000)
 
     return () => clearTimeout(timer)
