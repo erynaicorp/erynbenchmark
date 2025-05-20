@@ -424,8 +424,8 @@ export default function SignupForm() {
         <div className="container mx-auto px-4 py-8">
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center">
-              <div className="h-10 w-10">
-                <ErynLogo />
+              <div className="h-12 w-12">
+                <img src="/eryn-logo.png" alt="eryn logo" className="h-full w-full object-contain" />
               </div>
             </div>
             <div className="flex items-center space-x-2">
