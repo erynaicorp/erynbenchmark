@@ -3,8 +3,7 @@
 import type React from "react"
 
 import { useState, useRef } from "react"
-import { ErynLogo } from "@/components/eryn-logo"
-import { ReportIllustration } from "@/components/illustration"
+import { LoginIllustration } from "@/components/login-illustration"
 import { X, Search, BarChart2, Filter, Mic, Upload, Building, DollarSign, Info } from "lucide-react"
 import { benchmarkData } from "@/data/benchmark-data"
 import BenchmarkCard from "@/components/benchmark-card"
@@ -328,10 +327,13 @@ export default function SignupForm() {
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Form Section */}
           <div className="flex flex-col items-center justify-center p-6">
-            <div className="mb-8 h-16 w-16">
-              <ErynLogo />
+            <div className="mb-6 h-16 w-16">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pej3PEo2vacu5qWbP1jAdYGyEBi7x8.png"
+                alt="Company logo"
+                className="h-full w-full object-contain"
+              />
             </div>
-
             <div className="mb-8 text-center">
               <h1 className="text-2xl font-bold text-[#020617]">Welcome to eryn</h1>
               <p className="mt-2 text-[#0F172A]">Log in to continue</p>
@@ -417,15 +419,19 @@ export default function SignupForm() {
 
           {/* Illustration Section */}
           <div className="hidden h-full w-full lg:block">
-            <ReportIllustration />
+            <LoginIllustration />
           </div>
         </div>
       ) : (
         <div className="container mx-auto px-4 py-8">
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center">
-              <div className="h-12 w-12">
-                <img src="/eryn-logo.png" alt="eryn logo" className="h-full w-full object-contain" />
+              <div className="h-10 w-10">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pej3PEo2vacu5qWbP1jAdYGyEBi7x8.png"
+                  alt="Company logo"
+                  className="h-full w-full object-contain"
+                />
               </div>
             </div>
             <div className="flex items-center space-x-2">

@@ -30,7 +30,7 @@ export default function LoginForm() {
         <div className="flex flex-col items-center gap-6">
           {/* Logo */}
           <div className="h-16 w-auto">
-            <Image src="/eryn-logo.png" alt="eryn logo" width={160} height={64} priority />
+            <Image src="/eryn-logo.png" alt="eryn logo" width={160} height={64} />
           </div>
 
           {/* Header */}
