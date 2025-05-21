@@ -258,7 +258,7 @@ export default function SalaryFinder() {
                   value={filters.location}
                   onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                 >
-                  <option value="">All Locations</option>
+                  <option value="">All</option>
                   {locations.map((location) => (
                     <option key={location} value={location}>
                       {location}
@@ -277,7 +277,7 @@ export default function SalaryFinder() {
                   value={filters.experience}
                   onChange={(e) => setFilters({ ...filters, experience: e.target.value })}
                 >
-                  <option value="">All Experience Levels</option>
+                  <option value="">All</option>
                   {experiences.map((exp) => (
                     <option key={exp} value={exp}>
                       {exp}
@@ -296,7 +296,7 @@ export default function SalaryFinder() {
                   value={filters.industry}
                   onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
                 >
-                  <option value="">All Industries</option>
+                  <option value="">All</option>
                   {industries.map((industry) => (
                     <option key={industry} value={industry}>
                       {industry}
