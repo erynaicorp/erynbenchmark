@@ -38,8 +38,65 @@ export default function SignupForm() {
   const [showSuggestions, setShowSuggestions] = useState(false)
 
   // Get unique values for filter dropdowns
-  const locations = [...new Set(benchmarkData.map((data) => data.location))]
-  const experiences = [...new Set(benchmarkData.map((data) => data.experienceLevel))]
+  const locations = [
+    "Alabama",
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+    "District of Columbia",
+    "Puerto Rico",
+    "Guam",
+    "American Samoa",
+    "U.S. Virgin Islands",
+    "Northern Mariana Islands",
+  ]
+  const experiences = ["Manager", "Professional", "Support"]
   const industries = [...new Set(benchmarkData.map((data) => data.industry))]
   const companySizes = [...new Set(benchmarkData.map((data) => data.companySize))]
 
@@ -330,13 +387,12 @@ export default function SignupForm() {
             <div className="mb-6 h-16 w-16">
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pej3PEo2vacu5qWbP1jAdYGyEBi7x8.png"
-                alt="Company logo"
+                alt="eryn logo"
                 className="h-full w-full object-contain"
               />
             </div>
             <div className="mb-8 text-center">
               <h1 className="text-2xl font-bold text-[#020617]">Welcome to eryn</h1>
-              <p className="mt-2 text-[#0F172A]">Log in to continue</p>
             </div>
 
             {step === 1 ? (
@@ -429,7 +485,7 @@ export default function SignupForm() {
               <div className="h-10 w-10">
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pej3PEo2vacu5qWbP1jAdYGyEBi7x8.png"
-                  alt="Company logo"
+                  alt="eryn logo"
                   className="h-full w-full object-contain"
                 />
               </div>
@@ -442,9 +498,43 @@ export default function SignupForm() {
             </div>
           </div>
 
+          <div className="mb-8 flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="h-10 w-10">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pej3PEo2vacu5qWbP1jAdYGyEBi7x8.png"
+                  alt="eryn logo"
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <div className="ml-2 flex items-center">
+                <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">
+                  Free Version
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <button className="rounded-md bg-gradient-to-r from-[#31A8E0] to-[#182654] px-4 py-1.5 text-sm font-medium text-white shadow-sm hover:opacity-90 transition-opacity">
+                Upgrade to Pro
+              </button>
+              <div className="flex items-center space-x-2">
+                <div className="h-8 w-8 rounded-full bg-[#182654]"></div>
+                <span className="text-sm font-medium">
+                  {firstName} {lastName}
+                </span>
+              </div>
+            </div>
+          </div>
+
           <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900">eryn, your AI Comp Analyst</h2>
-            <p className="mt-2 text-gray-600">Benchmark total rewards across industries, geographies, revenue, & FTE</p>
+            <div className="mx-auto w-48">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%20%286%29-T7co3XDxg0rlzqb2OCW1wVTwDhUqzG.png"
+                alt="eryn"
+                className="w-full h-auto"
+              />
+            </div>
+            <p className="mt-2 text-gray-600">your AI Comp Analyst</p>
           </div>
 
           <div className="mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-md">
@@ -593,11 +683,11 @@ export default function SignupForm() {
                     </label>
                     <select
                       id="location"
-                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pr-8 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                       value={filters.location}
                       onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                     >
-                      <option value="">All Locations</option>
+                      <option value="">All</option>
                       {locations.map((location) => (
                         <option key={location} value={location}>
                           {location}
@@ -612,11 +702,11 @@ export default function SignupForm() {
                     </label>
                     <select
                       id="revenue"
-                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pr-8 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                       value={filters.revenue}
                       onChange={(e) => setFilters({ ...filters, revenue: e.target.value })}
                     >
-                      <option value="">All Revenue Ranges</option>
+                      <option value="">All</option>
                       {revenueRanges.map((range) => (
                         <option key={range} value={range}>
                           {range}
@@ -631,11 +721,11 @@ export default function SignupForm() {
                     </label>
                     <select
                       id="industry"
-                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pr-8 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                       value={filters.industry}
                       onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
                     >
-                      <option value="">All Industries</option>
+                      <option value="">All</option>
                       {industries.map((industry) => (
                         <option key={industry} value={industry}>
                           {industry}
@@ -650,11 +740,11 @@ export default function SignupForm() {
                     </label>
                     <select
                       id="companySize"
-                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pr-8 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                       value={filters.companySize}
                       onChange={(e) => setFilters({ ...filters, companySize: e.target.value })}
                     >
-                      <option value="">All Company Sizes</option>
+                      <option value="">All</option>
                       {companySizes.map((size) => (
                         <option key={size} value={size}>
                           {size}
@@ -687,10 +777,34 @@ export default function SignupForm() {
                 </div>
               )}
 
+              {/* Pro Feature Teaser */}
+              {hasSearched && searchResults.length > 0 && (
+                <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-4">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <Info className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-blue-800">Pro Features Available</h3>
+                      <div className="mt-2 text-sm text-blue-700">
+                        <p>Upgrade to Pro for unlimited benchmarks, advanced analytics, and custom reports.</p>
+                      </div>
+                      <div className="mt-3">
+                        <button className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                          Learn More
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {!hasSearched && (
                 <div>
                   <div className="rounded-lg bg-gray-50 p-8 text-center">
-                    <p className="text-gray-600">Enter a job title or role to find compensation benchmarks.</p>
+                    <p className="text-gray-600">
+                      Enter a job title, description, or you can chat with me to find benchmarks
+                    </p>
                     <div className="mt-6 grid gap-4 text-left md:grid-cols-3">
                       <div className="rounded-lg bg-white p-4 shadow">
                         <DollarSign className="mb-2 h-6 w-6 text-[#182654]" />
@@ -768,6 +882,22 @@ export default function SignupForm() {
                       </div>
                     </div>
                   )}
+
+                  {/* Pro Feature Comparison */}
+                  <div className="mt-4 rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="mb-2 text-lg font-semibold text-gray-900">Free vs Pro Features</h3>
+                        <p className="text-gray-700">
+                          Unlock advanced features with eryn Pro, including custom benchmarks, real-time data, and
+                          unlimited exports.
+                        </p>
+                      </div>
+                      <button className="rounded-md bg-[#182654] px-4 py-2 text-sm font-medium text-white hover:bg-[#182654]/90 focus:outline-none focus:ring-2 focus:ring-[#182654] focus:ring-offset-2">
+                        Upgrade
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
