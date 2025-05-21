@@ -5,10 +5,9 @@ import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 
-// Update the metadata title and description
 export const metadata: Metadata = {
-  title: "eryn | your AI Comp Analyst",
-  description: "AI-powered compensation intelligence platform",
+  title: "Job Salary Finder",
+  description: "Find accurate salary information for any job position",
     generator: 'v0.dev'
 }
 

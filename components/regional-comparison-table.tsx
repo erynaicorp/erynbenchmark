@@ -16,15 +16,15 @@ export default function RegionalComparisonTable({ role, currentLocation }: Regio
           : 90000
 
   const locations = [
-    { name: "California", multiplier: 1.25, costOfLiving: "High" },
-    { name: "New York", multiplier: 1.2, costOfLiving: "High" },
-    { name: "Washington", multiplier: 1.15, costOfLiving: "High" },
-    { name: "Massachusetts", multiplier: 1.1, costOfLiving: "High" },
-    { name: "Texas", multiplier: 1.0, costOfLiving: "Medium" },
-    { name: "Illinois", multiplier: 1.05, costOfLiving: "Medium" },
-    { name: "Colorado", multiplier: 1.0, costOfLiving: "Medium" },
-    { name: "Georgia", multiplier: 0.95, costOfLiving: "Medium" },
-    { name: "Florida", multiplier: 0.95, costOfLiving: "Medium" },
+    { name: "San Francisco, CA", multiplier: 1.25, costOfLiving: "High" },
+    { name: "New York, NY", multiplier: 1.2, costOfLiving: "High" },
+    { name: "Seattle, WA", multiplier: 1.15, costOfLiving: "High" },
+    { name: "Boston, MA", multiplier: 1.1, costOfLiving: "High" },
+    { name: "Austin, TX", multiplier: 1.0, costOfLiving: "Medium" },
+    { name: "Chicago, IL", multiplier: 1.05, costOfLiving: "Medium" },
+    { name: "Denver, CO", multiplier: 1.0, costOfLiving: "Medium" },
+    { name: "Atlanta, GA", multiplier: 0.95, costOfLiving: "Medium" },
+    { name: "Dallas, TX", multiplier: 0.95, costOfLiving: "Medium" },
     { name: "Remote", multiplier: 0.9, costOfLiving: "Varies" },
   ]
 

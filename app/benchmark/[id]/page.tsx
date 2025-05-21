@@ -101,11 +101,11 @@ export default function BenchmarkDetailsPage({ params }: { params: { id: string 
                 <div className="sr-only">
                   <div className="flex items-center">
                     <Building className="mr-1 h-5 w-5" />
-                    All
+                    {benchmark.industry}
                   </div>
                   <div className="flex items-center">
                     <MapPin className="mr-1 h-5 w-5" />
-                    California
+                    {benchmark.location}
                   </div>
                 </div>
               </div>
@@ -153,7 +153,7 @@ export default function BenchmarkDetailsPage({ params }: { params: { id: string 
                     <Briefcase className="mr-3 h-6 w-6 text-[#182654]" />
                     <div>
                       <h3 className="sr-only">Experience Level</h3>
-                      <p className="text-gray-600">Professional</p>
+                      <p className="text-gray-600">{benchmark.experienceLevel}</p>
                     </div>
                   </div>
                   <div className="group relative flex items-start">
@@ -163,7 +163,7 @@ export default function BenchmarkDetailsPage({ params }: { params: { id: string 
                     <Users className="mr-3 h-6 w-6 text-[#182654]" />
                     <div>
                       <h3 className="sr-only">Company Size</h3>
-                      <p className="text-gray-600">All</p>
+                      <p className="text-gray-600">{benchmark.companySize}</p>
                     </div>
                   </div>
                   <div className="group relative flex items-start">
@@ -217,7 +217,11 @@ export default function BenchmarkDetailsPage({ params }: { params: { id: string 
                     Market Trends (Trailing 12 Months)
                   </h2>
                   <div className="rounded-lg border border-gray-200 p-6">
-                    <MarketTrendsChart role={benchmark.role} industry="All" location="California" />
+                    <MarketTrendsChart
+                      role={benchmark.role}
+                      industry={benchmark.industry}
+                      location={benchmark.location}
+                    />
                   </div>
                 </div>
 
@@ -225,10 +229,10 @@ export default function BenchmarkDetailsPage({ params }: { params: { id: string 
                 <div className="mb-8">
                   <h2 className="mb-4 flex items-center text-2xl font-bold text-gray-900">
                     <Globe className="mr-2 h-6 w-6 text-[#182654]" />
-                    State Salary Comparison
+                    Regional Salary Comparison
                   </h2>
                   <div className="rounded-lg border border-gray-200 p-6">
-                    <RegionalComparisonTable role={benchmark.role} currentLocation="California" />
+                    <RegionalComparisonTable role={benchmark.role} currentLocation={benchmark.location} />
                   </div>
                 </div>
 

@@ -24,7 +24,7 @@ export default function BenchmarkCard({ benchmark }: BenchmarkCardProps) {
             </div>
             <Building className="mr-1 h-4 w-4" />
             <span className="sr-only">Industry:</span>
-            All
+            {benchmark.industry}
           </div>
           <div className="group relative flex items-center">
             <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
@@ -32,7 +32,7 @@ export default function BenchmarkCard({ benchmark }: BenchmarkCardProps) {
             </div>
             <MapPin className="mr-1 h-4 w-4" />
             <span className="sr-only">Location:</span>
-            California
+            {benchmark.location}
           </div>
           <div className="group relative flex items-center">
             <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
@@ -40,7 +40,7 @@ export default function BenchmarkCard({ benchmark }: BenchmarkCardProps) {
             </div>
             <Briefcase className="mr-1 h-4 w-4" />
             <span className="sr-only">Experience Level:</span>
-            Professional
+            {benchmark.experienceLevel}
           </div>
           <div className="group relative flex items-center">
             <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
@@ -48,7 +48,7 @@ export default function BenchmarkCard({ benchmark }: BenchmarkCardProps) {
             </div>
             <Users className="mr-1 h-4 w-4" />
             <span className="sr-only">Company Size:</span>
-            All
+            {benchmark.companySize}
           </div>
         </div>
 

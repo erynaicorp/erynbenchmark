@@ -36,6 +36,7 @@ export default function LoginForm() {
           {/* Header */}
           <div className="flex flex-col items-center gap-1 text-center">
             <h1 className="text-2xl font-medium text-[#020617]">Welcome to eryn</h1>
+            <p className="text-base text-[#0F172A]">Log in to continue</p>
           </div>
 
           {/* Form */}

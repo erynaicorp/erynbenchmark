@@ -264,7 +264,7 @@ export default function SalaryBenchmark() {
                   value={filters.location}
                   onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                 >
-                  <option value="">All</option>
+                  <option value="">All Locations</option>
                   {locations.map((location) => (
                     <option key={location} value={location}>
                       {location}
@@ -283,7 +283,7 @@ export default function SalaryBenchmark() {
                   value={filters.experience}
                   onChange={(e) => setFilters({ ...filters, experience: e.target.value })}
                 >
-                  <option value="">All</option>
+                  <option value="">All Experience Levels</option>
                   {experiences.map((exp) => (
                     <option key={exp} value={exp}>
                       {exp}
@@ -302,7 +302,7 @@ export default function SalaryBenchmark() {
                   value={filters.industry}
                   onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
                 >
-                  <option value="">All</option>
+                  <option value="">All Industries</option>
                   {industries.map((industry) => (
                     <option key={industry} value={industry}>
                       {industry}
@@ -321,7 +321,7 @@ export default function SalaryBenchmark() {
                   value={filters.companySize}
                   onChange={(e) => setFilters({ ...filters, companySize: e.target.value })}
                 >
-                  <option value="">All</option>
+                  <option value="">All Company Sizes</option>
                   {companySizes.map((size) => (
                     <option key={size} value={size}>
                       {size}
