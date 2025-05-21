@@ -489,24 +489,6 @@ export default function SignupForm() {
                   className="h-full w-full object-contain"
                 />
               </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-[#182654]"></div>
-              <span className="text-sm font-medium">
-                {firstName} {lastName}
-              </span>
-            </div>
-          </div>
-
-          <div className="mb-8 flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="h-10 w-10">
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pej3PEo2vacu5qWbP1jAdYGyEBi7x8.png"
-                  alt="eryn logo"
-                  className="h-full w-full object-contain"
-                />
-              </div>
               <div className="ml-2 flex items-center">
                 <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">
                   Free Version
@@ -519,9 +501,7 @@ export default function SignupForm() {
               </button>
               <div className="flex items-center space-x-2">
                 <div className="h-8 w-8 rounded-full bg-[#182654]"></div>
-                <span className="text-sm font-medium">
-                  {firstName} {lastName}
-                </span>
+                <span className="text-sm font-medium">{firstName}</span>
               </div>
             </div>
           </div>
