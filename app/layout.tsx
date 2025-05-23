@@ -1,14 +1,18 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Instrument_Sans } from "next/font/google"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument-sans",
+})
 
-// Update the metadata title and description
 export const metadata: Metadata = {
-  title: "eryn | your AI Comp Analyst",
-  description: "AI-powered compensation intelligence platform",
+  title: "Instant Compensation Benchmarking | Skip the Survey Hassle",
+  description:
+    "Get premium compensation benchmarking data instantly—without months of internal coordination and complex job matching",
     generator: 'v0.dev'
 }
 
@@ -19,19 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Add this to make the SpeechRecognition type available */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            if (!window.SpeechRecognition && window.webkitSpeechRecognition) {
-              window.SpeechRecognition = window.webkitSpeechRecognition;
-            }
-          `,
-          }}
-        />
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body className={instrumentSans.className}>{children}</body>
     </html>
   )
 }
