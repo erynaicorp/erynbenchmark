@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
-import { Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff, Check } from "lucide-react"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -31,6 +31,11 @@ export default function LoginPage() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
+  }
+
+  const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRememberMe(e.target.checked)
+    console.log("Remember me changed to:", e.target.checked)
   }
 
   return (
@@ -99,18 +104,26 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="mb-6 flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                className="h-4 w-4 rounded border-2 border-gray-300 bg-white text-[#182654] focus:ring-2 focus:ring-[#182654] focus:ring-offset-2"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 cursor-pointer">
-                Remember me
-              </label>
+            <div className="mb-6 flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="relative">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={handleRememberMeChange}
+                    className="h-4 w-4 rounded border-2 border-gray-300 bg-white text-[#182654] focus:ring-2 focus:ring-[#182654] focus:ring-offset-2"
+                  />
+                  {rememberMe && <Check className="absolute inset-0 h-4 w-4 text-[#182654] pointer-events-none" />}
+                </div>
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 cursor-pointer">
+                  Remember me
+                </label>
+              </div>
+
+              {/* Debug indicator */}
+              <div className="text-xs text-gray-500">Status: {rememberMe ? "✓ Checked" : "○ Unchecked"}</div>
             </div>
 
             <button
@@ -118,9 +131,20 @@ export default function LoginPage() {
               disabled={isLoading}
               className="w-full rounded-md bg-[#182654] py-3 text-center text-sm font-medium text-white shadow-sm hover:bg-[#182654]/90 focus:outline-none focus:ring-2 focus:ring-[#182654] focus:ring-offset-2 disabled:opacity-70"
             >
-              Sign in
+              {isLoading ? "Signing in..." : "Sign in"}
             </button>
           </form>
+
+          {/* Debug section */}
+          <div className="mt-4 rounded-md bg-gray-50 p-3 text-xs text-gray-600">
+            <strong>Debug Info:</strong>
+            <br />
+            Email: {email || "(empty)"}
+            <br />
+            Password: {password ? "•".repeat(password.length) : "(empty)"}
+            <br />
+            Remember Me: {rememberMe ? "Yes" : "No"}
+          </div>
 
           {/* Divider */}
           <div className="relative my-6">
