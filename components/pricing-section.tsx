@@ -1,6 +1,86 @@
 import Link from "next/link"
 
 export function PricingSection() {
+  const features = [
+    {
+      category: "Core Features",
+      items: [
+        { name: "Audio Input - Speak job descriptions or search queries", free: true, paid: true },
+        { name: "Job Description Upload - Upload JDs (PDF, DOCX, TXT)", free: true, paid: true },
+        { name: "Filter by State - View state-level compensation data", free: true, paid: true },
+        { name: "Basic Job Family Access - Support, Professional, Management (entry levels)", free: true, paid: true },
+        { name: "AI-Assisted Job Matching", free: "Basic", paid: "Advanced, AI-powered" },
+      ],
+    },
+    {
+      category: "Analysis & Insights",
+      items: [
+        {
+          name: "Job Analysis Questionnaire by eryn - Conducted via phone, Slack, Teams, SMS, email, or chat",
+          free: false,
+          paid: true,
+        },
+        { name: "Job Description Scoring - Quantitative complexity and level score", free: false, paid: true },
+        { name: "Full Job Level Access - 4 Support, 6 Professional, 6 Management levels", free: false, paid: true },
+        { name: "Advanced Filters - Revenue, FTE, Industry, Location, Org Type", free: false, paid: true },
+        { name: "Explainable Match Rationale - AI-generated logic for market match", free: false, paid: true },
+        { name: "Percentile Insights - 10th, 25th, 50th, 75th, 90th", free: false, paid: true },
+      ],
+    },
+    {
+      category: "Advanced Tools",
+      items: [
+        { name: "Custom Peer Group Builder - Upload or filter by comparator orgs", free: false, paid: true },
+        { name: "AI-Generated Salary Ranges - Min/Mid/Max based on benchmarks", free: false, paid: true },
+        { name: "Market Trend Visualizations - Historic rate trends across roles", free: false, paid: true },
+        { name: "Role Comparison Tool - Compare jobs across levels & industries", free: false, paid: true },
+        { name: "Predictive Market Forecasting - Future pay trends based on labor data", free: false, paid: true },
+        { name: "Justifiable Pay Recommendations - Exportable rationale for stakeholders", free: false, paid: true },
+      ],
+    },
+    {
+      category: "Data & Integration",
+      items: [
+        { name: "Report Exports - Downloadable PDF or Excel", free: false, paid: true },
+        { name: "Saved Jobs & Filters", free: false, paid: true },
+        { name: "Custom Benchmark Library", free: false, paid: true },
+        {
+          name: "3rd Party Data Import - WTW, Mercer, Radford, Culpepper, PayScale integration",
+          free: false,
+          paid: true,
+        },
+        { name: "Rosetta Stone for Survey Mapping - Map jobs across survey sources", free: false, paid: true },
+        { name: "Total Rewards (Industry Specific) - Qualitative RSS Feed", free: false, paid: true },
+        { name: "HRBP/Recruiter Views - Condensed summaries for quick action", free: false, paid: true },
+      ],
+    },
+  ]
+
+  const CheckIcon = ({ color }: { color: string }) => (
+    <svg
+      className="w-5 h-5 flex-shrink-0"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ color }}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+    </svg>
+  )
+
+  const XIcon = () => (
+    <svg
+      className="w-5 h-5 flex-shrink-0 text-red-500"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  )
+
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -11,7 +91,8 @@ export function PricingSection() {
           Choose the plan that fits your organization's needs
         </p>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* Pricing Cards */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
           {/* Free Plan */}
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
             <div className="p-8 border-b border-gray-200">
@@ -34,84 +115,28 @@ export function PricingSection() {
               </Link>
             </div>
             <div className="p-8">
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Access to over 1,000 benchmark jobs</span>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Access to over 1,000 benchmark jobs</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Coverage in all 50 US states and territories</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Coverage in all 50 US states and territories</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">4 job levels: Technical, Support, Professional, Management</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">
+                    4 job levels: Technical, Support, Professional, Management
+                  </span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Basic compensation data</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Basic AI-assisted job matching</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Standard market percentiles (25th, 50th, 75th)</span>
-                </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">1 user account</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Audio input and job description upload</span>
                 </li>
               </ul>
             </div>
@@ -148,115 +173,93 @@ export function PricingSection() {
               </Link>
             </div>
             <div className="p-8">
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">
                     <strong>Everything in Free</strong>, plus:
                   </span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Unlimited job benchmarks</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Advanced AI-powered job matching</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Advanced compensation data with industry insights</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Job analysis questionnaire by eryn</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Custom percentiles and detailed breakdowns</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Full job level access (16 total levels)</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Priority email and chat support</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Advanced filters & percentile insights</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Up to 10 user accounts</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">AI-generated salary ranges & market forecasting</span>
                 </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">Data export capabilities</span>
-                </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ color: "#31E2EF" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-600">API access for integration</span>
+                <li className="flex items-start gap-3">
+                  <CheckIcon color="#31E2EF" />
+                  <span className="text-gray-600 text-sm">Report exports & 3rd party integrations</span>
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+
+        {/* Detailed Feature Comparison */}
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-2xl font-bold text-center mb-8" style={{ color: "#182654" }}>
+            Detailed Feature Comparison
+          </h3>
+
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            {/* Header */}
+            <div className="grid grid-cols-3 gap-4 p-6 border-b border-gray-200" style={{ backgroundColor: "#182654" }}>
+              <div className="text-white font-semibold">Features</div>
+              <div className="text-center text-white font-semibold">Free</div>
+              <div className="text-center text-white font-semibold">Benchmark</div>
+            </div>
+
+            {/* Feature Categories */}
+            {features.map((category, categoryIndex) => (
+              <div key={categoryIndex}>
+                <div
+                  className="p-4 font-semibold text-lg border-b border-gray-100"
+                  style={{ backgroundColor: "#f8fafc", color: "#182654" }}
+                >
+                  {category.category}
+                </div>
+                {category.items.map((feature, featureIndex) => (
+                  <div
+                    key={featureIndex}
+                    className="grid grid-cols-3 gap-4 p-4 border-b border-gray-100 hover:bg-gray-50"
+                  >
+                    <div className="text-gray-700 text-sm">{feature.name}</div>
+                    <div className="flex justify-center">
+                      {feature.free === true ? (
+                        <CheckIcon color="#31E2EF" />
+                      ) : feature.free === false ? (
+                        <XIcon />
+                      ) : (
+                        <span className="text-xs text-gray-600 text-center">{feature.free}</span>
+                      )}
+                    </div>
+                    <div className="flex justify-center">
+                      {feature.paid === true ? (
+                        <CheckIcon color="#31E2EF" />
+                      ) : feature.paid === false ? (
+                        <XIcon />
+                      ) : (
+                        <span className="text-xs text-gray-600 text-center">{feature.paid}</span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
 
