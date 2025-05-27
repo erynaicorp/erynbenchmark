@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -19,7 +20,7 @@ export default function LoginPage() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 800))
-      console.log("Login attempt with:", { email, password })
+      console.log("Login attempt with:", { email, password, rememberMe })
       // In a real app, you would authenticate the user here
     } catch (error) {
       console.error("Login error:", error)
@@ -96,6 +97,20 @@ export default function LoginPage() {
                   <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
                 </button>
               </div>
+            </div>
+
+            <div className="mb-6 flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-[#182654] focus:ring-[#182654]"
+              />
+              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                Remember me
+              </label>
             </div>
 
             <button
