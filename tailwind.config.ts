@@ -14,10 +14,10 @@ module.exports = {
         sans: ["var(--font-instrument-sans)", "system-ui", "sans-serif"],
       },
       colors: {
-        // Brand colors
-        "brand-blue": "#31E2EF",
-        "accent-blue": "#2483A1",
-        "dark-blue": "#182654",
+        // Brand colors - updated for better accessibility
+        "brand-blue": "#0891b2", // Changed from #31E2EF to a darker cyan
+        "accent-blue": "#1e40af", // Changed from #2483A1 to a darker blue
+        "dark-blue": "#1e3a8a", // Changed from #182654 to a slightly lighter dark blue
 
         // Standard colors
         border: "hsl(var(--border))",

@@ -24,16 +24,16 @@ export default function LandingPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">Skip the Survey Hassle</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-white/95">
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-white">
             Get premium compensation benchmarking data instantly—without months of internal coordination and complex job
             matching
           </p>
           <Link
-            href="#"
+            href="/waitlist"
             className="inline-block font-semibold uppercase tracking-wide px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             style={{ backgroundColor: "#31E2EF", color: "#182654" }}
           >
-            Get Instant Access
+            Join the Waitlist
           </Link>
         </div>
       </section>
@@ -212,7 +212,7 @@ export default function LandingPage() {
                 <div className="relative z-10">
                   <div className="text-5xl mb-4">{item.icon}</div>
                   <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                  <p className="text-white/90">{item.description}</p>
+                  <p className="text-white">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -254,7 +254,7 @@ export default function LandingPage() {
                 className="bg-white p-6 rounded-xl shadow-sm border-l-4 hover:translate-x-2 transition-transform duration-300"
                 style={{ borderLeftColor: "#31E2EF" }}
               >
-                <h3 className="text-xl font-semibold mb-2" style={{ color: "#31E2EF" }}>
+                <h3 className="text-xl font-semibold mb-2" style={{ color: "#182654" }}>
                   {item.title}
                 </h3>
                 <p className="text-gray-600">{item.description}</p>
@@ -273,16 +273,16 @@ export default function LandingPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Access Premium Compensation Data in Minutes, Not Months
           </h2>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-white/90">
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-white">
             Get the market intelligence you need to attract top talent and retain key employees—without the operational
             complexity.
           </p>
           <Link
-            href="#"
+            href="/waitlist"
             className="inline-block font-semibold uppercase tracking-wide px-10 py-5 rounded-full text-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             style={{ backgroundColor: "#31E2EF", color: "#182654" }}
           >
-            Get Started Now
+            Join the Waitlist
           </Link>
         </div>
       </section>
