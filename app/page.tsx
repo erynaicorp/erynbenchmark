@@ -29,11 +29,11 @@ export default function LandingPage() {
             matching
           </p>
           <Link
-            href="#"
+            href="/waitlist"
             className="inline-block font-semibold uppercase tracking-wide px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             style={{ backgroundColor: "#31E2EF", color: "#182654" }}
           >
-            Get Instant Access
+            Join the Waitlist
           </Link>
         </div>
       </section>
@@ -278,11 +278,11 @@ export default function LandingPage() {
             complexity.
           </p>
           <Link
-            href="#"
+            href="/early-access"
             className="inline-block font-semibold uppercase tracking-wide px-10 py-5 rounded-full text-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             style={{ backgroundColor: "#31E2EF", color: "#182654" }}
           >
-            Get Started Now
+            Get Early Access
           </Link>
         </div>
       </section>

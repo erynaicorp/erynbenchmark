@@ -107,11 +107,11 @@ export function PricingSection() {
                 <span className="text-gray-600 ml-2">/month</span>
               </div>
               <Link
-                href="#"
+                href="/waitlist"
                 className="block w-full py-3 px-4 text-center rounded-lg border-2 font-semibold hover:bg-gray-50 transition-colors duration-300"
                 style={{ borderColor: "#2483A1", color: "#2483A1" }}
               >
-                Get Started
+                Join Waitlist
               </Link>
             </div>
             <div className="p-8">
@@ -165,11 +165,11 @@ export function PricingSection() {
                 <span className="text-gray-600 ml-2">/month</span>
               </div>
               <Link
-                href="#"
+                href="/early-access"
                 className="block w-full py-3 px-4 text-center rounded-lg font-semibold hover:opacity-90 transition-colors duration-300 shadow-md"
                 style={{ backgroundColor: "#31E2EF", color: "#182654" }}
               >
-                Subscribe Now
+                Get Early Access
               </Link>
             </div>
             <div className="p-8">
