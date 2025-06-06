@@ -105,7 +105,7 @@ export default function EarlyAccessPage() {
                   Early Access
                 </div>
               </div>
-              <p className="text-sm text-gray-600">Cancel anytime • 30-day money-back guarantee • Priority support</p>
+              <p className="text-sm text-gray-600">Cancel anytime • Priority support</p>
             </div>
           </div>
 
@@ -401,7 +401,7 @@ export default function EarlyAccessPage() {
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">30-day money-back guarantee</span>
+                <span className="text-sm text-gray-600">Exclusive beta features access</span>
               </div>
             </div>
           </div>
