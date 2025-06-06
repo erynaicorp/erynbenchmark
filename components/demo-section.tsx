@@ -19,11 +19,11 @@ export function DemoSection() {
       </div>
       <div className="text-center">
         <Link
-          href="/waitlist"
+          href="#"
           className="inline-block font-semibold uppercase tracking-wide px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           style={{ backgroundColor: "#31E2EF", color: "#182654" }}
         >
-          Join the Waitlist
+          Get Instant Access
         </Link>
       </div>
     </div>

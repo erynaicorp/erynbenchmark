@@ -63,7 +63,7 @@ export function PricingSection() {
       stroke="currentColor"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ color: color === "#31E2EF" ? "#182654" : color }}
+      style={{ color }}
     >
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
     </svg>
@@ -71,7 +71,7 @@ export function PricingSection() {
 
   const XIcon = () => (
     <svg
-      className="w-5 h-5 flex-shrink-0 text-red-600"
+      className="w-5 h-5 flex-shrink-0 text-red-500"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -107,11 +107,11 @@ export function PricingSection() {
                 <span className="text-gray-600 ml-2">/month</span>
               </div>
               <Link
-                href="/waitlist"
+                href="#"
                 className="block w-full py-3 px-4 text-center rounded-lg border-2 font-semibold hover:bg-gray-50 transition-colors duration-300"
                 style={{ borderColor: "#2483A1", color: "#2483A1" }}
               >
-                Join Waitlist
+                Get Started
               </Link>
             </div>
             <div className="p-8">
@@ -165,11 +165,11 @@ export function PricingSection() {
                 <span className="text-gray-600 ml-2">/month</span>
               </div>
               <Link
-                href="/early-access"
+                href="#"
                 className="block w-full py-3 px-4 text-center rounded-lg font-semibold hover:opacity-90 transition-colors duration-300 shadow-md"
                 style={{ backgroundColor: "#31E2EF", color: "#182654" }}
               >
-                Get Early Access
+                Subscribe Now
               </Link>
             </div>
             <div className="p-8">
@@ -266,7 +266,7 @@ export function PricingSection() {
         <div className="mt-16 text-center">
           <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
             Need a custom enterprise solution?{" "}
-            <Link href="#" className="font-medium hover:underline" style={{ color: "#0891b2" }}>
+            <Link href="#" className="font-medium hover:underline" style={{ color: "#2483A1" }}>
               Contact our sales team
             </Link>
             .
