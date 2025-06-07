@@ -23,6 +23,7 @@ export default function EarlyAccessPage() {
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState("")
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -35,12 +36,30 @@ export default function EarlyAccessPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError("")
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      const response = await fetch("/api/early-access", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-    setIsSubmitted(true)
-    setIsSubmitting(false)
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to process payment")
+      }
+
+      setIsSubmitted(true)
+    } catch (error: any) {
+      console.error("Error submitting form:", error)
+      setError(error.message || "There was an error processing your payment. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -105,11 +124,17 @@ export default function EarlyAccessPage() {
                   Early Access
                 </div>
               </div>
-              <p className="text-sm text-gray-600">Cancel anytime • 30-day money-back guarantee • Priority support</p>
+              <p className="text-sm text-gray-600">Cancel anytime • Priority support</p>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl p-8">
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-600 text-sm">{error}</p>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Personal Information */}
               <div>
@@ -401,7 +426,7 @@ export default function EarlyAccessPage() {
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">30-day money-back guarantee</span>
+                <span className="text-sm text-gray-600">Exclusive beta features access</span>
               </div>
             </div>
           </div>

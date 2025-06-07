@@ -23,6 +23,12 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error("Supabase error:", error)
+
+      // Handle duplicate email error
+      if (error.code === "23505") {
+        return NextResponse.json({ error: "This email is already on the waitlist" }, { status: 400 })
+      }
+
       return NextResponse.json({ error: "Failed to save signup" }, { status: 500 })
     }
 

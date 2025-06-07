@@ -1,39 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { supabase } from "@/lib/supabase"
-import Stripe from "stripe"
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-})
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    // Create Stripe customer
-    const customer = await stripe.customers.create({
-      email: body.email,
-      name: `${body.firstName} ${body.lastName}`,
-      metadata: {
-        company: body.company,
-        jobTitle: body.jobTitle,
-      },
-    })
-
-    // Create subscription
-    const subscription = await stripe.subscriptions.create({
-      customer: customer.id,
-      items: [
-        {
-          price: process.env.STRIPE_PRICE_ID!, // Your $99/month price ID
-        },
-      ],
-      payment_behavior: "default_incomplete",
-      payment_settings: { save_default_payment_method: "on_subscription" },
-      expand: ["latest_invoice.payment_intent"],
-    })
-
-    // Save to database
+    // For now, just save the signup info without real Stripe integration
+    // You can add Stripe integration later
     const { data, error } = await supabase
       .from("early_access_payments")
       .insert([
@@ -43,22 +16,25 @@ export async function POST(request: NextRequest) {
           email: body.email,
           company: body.company,
           job_title: body.jobTitle,
-          stripe_customer_id: customer.id,
-          stripe_subscription_id: subscription.id,
-          payment_status: "pending",
+          payment_status: "completed", // Simulated for now
         },
       ])
       .select()
 
     if (error) {
       console.error("Database error:", error)
+
+      // Handle duplicate email error
+      if (error.code === "23505") {
+        return NextResponse.json({ error: "This email already has early access" }, { status: 400 })
+      }
+
       return NextResponse.json({ error: "Failed to save payment info" }, { status: 500 })
     }
 
     return NextResponse.json({
       success: true,
-      clientSecret: subscription.latest_invoice?.payment_intent?.client_secret,
-      subscriptionId: subscription.id,
+      data,
     })
   } catch (error) {
     console.error("Payment error:", error)

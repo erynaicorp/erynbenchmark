@@ -32,3 +32,11 @@ CREATE INDEX idx_waitlist_email ON waitlist_signups(email);
 CREATE INDEX idx_waitlist_created ON waitlist_signups(created_at);
 CREATE INDEX idx_payments_email ON early_access_payments(email);
 CREATE INDEX idx_payments_status ON early_access_payments(payment_status);
+
+-- Enable Row Level Security (optional but recommended)
+ALTER TABLE waitlist_signups ENABLE ROW LEVEL SECURITY;
+ALTER TABLE early_access_payments ENABLE ROW LEVEL SECURITY;
+
+-- Create policies to allow inserts (you can adjust these based on your needs)
+CREATE POLICY "Allow public inserts" ON waitlist_signups FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public inserts" ON early_access_payments FOR INSERT WITH CHECK (true);
