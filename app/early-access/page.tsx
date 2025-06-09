@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, CheckCircle, CreditCard, Lock } from "lucide-react"
+import { ArrowLeft, CheckCircle, Lock } from "lucide-react"
 
 export default function EarlyAccessPage() {
   const [formData, setFormData] = useState({
@@ -13,15 +13,7 @@ export default function EarlyAccessPage() {
     email: "",
     company: "",
     jobTitle: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    billingAddress: "",
-    city: "",
-    state: "",
-    zipCode: "",
   })
-  const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
 
@@ -39,7 +31,7 @@ export default function EarlyAccessPage() {
     setError("")
 
     try {
-      const response = await fetch("/api/early-access", {
+      const response = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,73 +42,28 @@ export default function EarlyAccessPage() {
       const result = await response.json()
 
       if (!response.ok) {
-        throw new Error(result.error || "Failed to process payment")
+        throw new Error(result.error || "Failed to create checkout session")
       }
 
-      setIsSubmitted(true)
+      // Redirect to Stripe Checkout
+      const stripe = (await import("@stripe/stripe-js")).loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+
+      const stripeInstance = await stripe
+      if (stripeInstance) {
+        const { error } = await stripeInstance.redirectToCheckout({
+          sessionId: result.sessionId,
+        })
+
+        if (error) {
+          throw new Error(error.message)
+        }
+      }
     } catch (error: any) {
       console.error("Error submitting form:", error)
       setError(error.message || "There was an error processing your payment. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  if (isSubmitted) {
-    return (
-      <main className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#f8fafc" }}>
-        <div className="max-w-md w-full mx-4">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
-            <div className="mb-6">
-              <CheckCircle className="w-16 h-16 mx-auto" style={{ color: "#31E2EF" }} />
-            </div>
-            <h1 className="text-2xl font-bold mb-4" style={{ color: "#182654" }}>
-              Welcome to Early Access!
-            </h1>
-            <p className="text-gray-600 mb-6">
-              Your payment has been processed successfully. You are now in the exclusive group and will get first dibs
-              on this data. You'll receive access credentials within 24 hours and be among the first to experience
-              eryn's premium features.
-            </p>
-            <p className="text-sm text-gray-500 mb-6">Check your email for next steps and setup instructions.</p>
-            <div className="mb-8">
-              <p className="text-sm text-gray-500 mb-4">Follow us for the latest updates and compensation insights:</p>
-              <div className="flex justify-center gap-4">
-                <a
-                  href="https://www.linkedin.com/company/ai-eryn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                  Follow on LinkedIn
-                </a>
-                <a
-                  href="https://www.instagram.com/eryn_ai_corp/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-colors text-sm font-medium"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                  </svg>
-                  Follow on Instagram
-                </a>
-              </div>
-            </div>
-            <Link
-              href="/"
-              className="inline-block font-semibold uppercase tracking-wide px-8 py-3 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              style={{ backgroundColor: "#31E2EF", color: "#182654" }}
-            >
-              Back to Home
-            </Link>
-          </div>
-        </div>
-      </main>
-    )
   }
 
   return (
@@ -253,146 +200,15 @@ export default function EarlyAccessPage() {
                 </div>
               </div>
 
-              {/* Payment Information */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: "#182654" }}>
-                  <CreditCard className="w-5 h-5" />
-                  Payment Information
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                      Card Number *
-                    </label>
-                    <input
-                      type="text"
-                      id="cardNumber"
-                      name="cardNumber"
-                      required
-                      value={formData.cardNumber}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-colors focus:ring-cyan-600 focus:border-cyan-600"
-                      placeholder="1234 5678 9012 3456"
-                      maxLength={19}
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="expiryDate" className="block text-sm font-medium text-gray-700 mb-2">
-                        Expiry Date *
-                      </label>
-                      <input
-                        type="text"
-                        id="expiryDate"
-                        name="expiryDate"
-                        required
-                        value={formData.expiryDate}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-colors focus:ring-cyan-600 focus:border-cyan-600"
-                        placeholder="MM/YY"
-                        maxLength={5}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="cvv" className="block text-sm font-medium text-gray-700 mb-2">
-                        CVV *
-                      </label>
-                      <input
-                        type="text"
-                        id="cvv"
-                        name="cvv"
-                        required
-                        value={formData.cvv}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-colors focus:ring-cyan-600 focus:border-cyan-600"
-                        placeholder="123"
-                        maxLength={4}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Billing Address */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4" style={{ color: "#182654" }}>
-                  Billing Address
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="billingAddress" className="block text-sm font-medium text-gray-700 mb-2">
-                      Street Address *
-                    </label>
-                    <input
-                      type="text"
-                      id="billingAddress"
-                      name="billingAddress"
-                      required
-                      value={formData.billingAddress}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-colors focus:ring-cyan-600 focus:border-cyan-600"
-                      placeholder="123 Main Street"
-                    />
-                  </div>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div>
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-                        City *
-                      </label>
-                      <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        required
-                        value={formData.city}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-colors focus:ring-cyan-600 focus:border-cyan-600"
-                        placeholder="San Francisco"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">
-                        State *
-                      </label>
-                      <input
-                        type="text"
-                        id="state"
-                        name="state"
-                        required
-                        value={formData.state}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-colors focus:ring-cyan-600 focus:border-cyan-600"
-                        placeholder="CA"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-2">
-                        ZIP Code *
-                      </label>
-                      <input
-                        type="text"
-                        id="zipCode"
-                        name="zipCode"
-                        required
-                        value={formData.zipCode}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-colors focus:ring-cyan-600 focus:border-cyan-600"
-                        placeholder="94102"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               {/* Security Notice */}
               <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
                 <div className="flex items-center gap-2 mb-2">
                   <Lock className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-700">Secure Payment</span>
+                  <span className="text-sm font-medium text-gray-700">Secure Payment with Stripe</span>
                 </div>
                 <p className="text-xs text-gray-600">
-                  Your payment information is encrypted and secure. We use industry-standard SSL encryption to protect
-                  your data.
+                  Your payment will be processed securely by Stripe. You'll be redirected to complete your payment with
+                  credit card details.
                 </p>
               </div>
 
@@ -404,7 +220,7 @@ export default function EarlyAccessPage() {
                   className="w-full font-semibold uppercase tracking-wide px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   style={{ backgroundColor: "#31E2EF", color: "#182654" }}
                 >
-                  {isSubmitting ? "Processing Payment..." : "Start Early Access - $99/month"}
+                  {isSubmitting ? "Redirecting to Payment..." : "Continue to Payment - $99/month"}
                 </button>
               </div>
 
