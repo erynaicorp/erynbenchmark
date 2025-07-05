@@ -1,20 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Instrument_Sans } from "next/font/google"
-import Script from "next/script"
+import { Inter } from "next/font/google"
 import "./globals.css"
 
-const instrumentSans = Instrument_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-instrument-sans",
-})
+const inter = Inter({ subsets: ["latin"] })
 
+// Update the metadata title and description
 export const metadata: Metadata = {
-  title: "Instant Compensation Benchmarking | Skip the Survey Hassle",
-  description:
-    "Get premium compensation benchmarking data instantly—without months of internal coordination and complex job matching",
-  generator: "v0.dev",
+  title: "eryn | your AI Comp Analyst",
+  description: "AI-powered compensation intelligence platform",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -25,18 +20,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google Analytics */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-4LFP82QSSG" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-4LFP82QSSG');
-          `}
-        </Script>
+        {/* Add this to make the SpeechRecognition type available */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            if (!window.SpeechRecognition && window.webkitSpeechRecognition) {
+              window.SpeechRecognition = window.webkitSpeechRecognition;
+            }
+          `,
+          }}
+        />
       </head>
-      <body className={instrumentSans.className}>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
