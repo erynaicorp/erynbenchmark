@@ -167,52 +167,6 @@ export default function LandingPage() {
           </div>
 
           <DemoSection />
-
-          {/* Professional Calculator CTA Section */}
-          <div className="mt-16 relative overflow-hidden rounded-2xl max-w-4xl mx-auto">
-            {/* Blue Background */}
-            <div className="absolute inset-0" style={{ backgroundColor: "#182654" }}></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(49,226,239,0.1)_0%,transparent_70%)]"></div>
-
-            {/* Content */}
-            <div className="relative z-10 p-10 text-center text-white">
-              <div className="mb-6">
-                <h3 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: "#31E2EF" }}>
-                  Free Salary Aging Calculator
-                </h3>
-                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                  Analyze how compensation changes over time with market trends and inflation. Get data-driven insights
-                  for strategic planning.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#31E2EF" }}></div>
-                  <span className="text-gray-300">Real market data</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#31E2EF" }}></div>
-                  <span className="text-gray-300">Instant analysis</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#31E2EF" }}></div>
-                  <span className="text-gray-300">No registration required</span>
-                </div>
-              </div>
-
-              <Link
-                href="/calculator"
-                className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-lg text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                style={{ backgroundColor: "#31E2EF", color: "#182654" }}
-              >
-                Try Calculator
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-          </div>
         </div>
       </section>
 
