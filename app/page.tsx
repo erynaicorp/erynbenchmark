@@ -168,24 +168,50 @@ export default function LandingPage() {
 
           <DemoSection />
 
-          {/* Get Started CTA Section */}
-          <div className="mt-16 bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl border-2 border-gray-200 max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl font-semibold mb-4" style={{ color: "#182654" }}>
-              Get Started with eryn
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Sign up now to access our free salary aging calculator and discover how market forces affect compensation
-              over time. Get instant insights and explore our full benchmarking platform.
-            </p>
-            <Link
-              href="https://erynbenchmark-git-main-jeremy-erynais-projects.vercel.app/signup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block font-semibold uppercase tracking-wide px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              style={{ backgroundColor: "#2483A1", color: "white" }}
-            >
-              Sign Up & Start Calculating
-            </Link>
+          {/* Professional Calculator CTA Section */}
+          <div className="mt-16 relative overflow-hidden rounded-2xl max-w-4xl mx-auto">
+            {/* Blue Background */}
+            <div className="absolute inset-0" style={{ backgroundColor: "#182654" }}></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(49,226,239,0.1)_0%,transparent_70%)]"></div>
+
+            {/* Content */}
+            <div className="relative z-10 p-10 text-center text-white">
+              <div className="mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: "#31E2EF" }}>
+                  Free Salary Aging Calculator
+                </h3>
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                  Analyze how compensation changes over time with market trends and inflation. Get data-driven insights
+                  for strategic planning.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#31E2EF" }}></div>
+                  <span className="text-gray-300">Real market data</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#31E2EF" }}></div>
+                  <span className="text-gray-300">Instant analysis</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#31E2EF" }}></div>
+                  <span className="text-gray-300">No registration required</span>
+                </div>
+              </div>
+
+              <Link
+                href="/calculator"
+                className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-lg text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                style={{ backgroundColor: "#31E2EF", color: "#182654" }}
+              >
+                Try Calculator
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
