@@ -43,10 +43,11 @@ export default function WaitlistPage() {
         body: JSON.stringify(formData),
       })
 
-      const result = await response.json()
+      const contentType = response.headers.get("content-type") ?? ""
+      const result = contentType.includes("application/json") ? await response.json() : { error: await response.text() }
 
       if (!response.ok) {
-        throw new Error(result.error || "Failed to submit")
+        throw new Error(result.error ?? "Request failed")
       }
 
       setIsSubmitted(true)

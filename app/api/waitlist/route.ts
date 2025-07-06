@@ -1,38 +1,29 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { supabase } from "@/lib/supabase"
 
 export async function POST(request: NextRequest) {
+  let body: any
   try {
-    const body = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Body must be valid JSON" }, { status: 400 })
+  }
 
-    const { data, error } = await supabase
-      .from("waitlist_signups")
-      .insert([
-        {
-          first_name: body.firstName,
-          last_name: body.lastName,
-          email: body.email,
-          company: body.company,
-          job_title: body.jobTitle,
-          company_size: body.companySize,
-          industry: body.industry,
-          phone: body.phone,
-        },
-      ])
-      .select()
+  try {
+    // Simulate processing delay
+    await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    if (error) {
-      console.error("Supabase error:", error)
+    // In a real app, you would save to database here
+    console.log("Waitlist signup:", body)
 
-      // Handle duplicate email error
-      if (error.code === "23505") {
-        return NextResponse.json({ error: "This email is already on the waitlist" }, { status: 400 })
-      }
-
-      return NextResponse.json({ error: "Failed to save signup" }, { status: 500 })
-    }
-
-    return NextResponse.json({ success: true, data })
+    // Mock successful response
+    return NextResponse.json({
+      success: true,
+      data: {
+        id: Math.random().toString(36).substr(2, 9),
+        ...body,
+        created_at: new Date().toISOString(),
+      },
+    })
   } catch (error) {
     console.error("API error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })

@@ -1,42 +1,37 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { supabase } from "@/lib/supabase"
 
 export async function POST(request: NextRequest) {
+  let body: any
   try {
-    const body = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Body must be valid JSON" }, { status: 400 })
+  }
 
-    // For now, just save the signup info without real Stripe integration
-    // You can add Stripe integration later
-    const { data, error } = await supabase
-      .from("early_access_payments")
-      .insert([
-        {
-          first_name: body.firstName,
-          last_name: body.lastName,
-          email: body.email,
-          company: body.company,
-          job_title: body.jobTitle,
-          payment_status: "completed", // Simulated for now
-        },
-      ])
-      .select()
+  const { firstName, lastName, email, company, jobTitle } = body
 
-    if (error) {
-      console.error("Database error:", error)
+  try {
+    // Simulate processing delay
+    await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      // Handle duplicate email error
-      if (error.code === "23505") {
-        return NextResponse.json({ error: "This email already has early access" }, { status: 400 })
-      }
+    // In a real app, you would save to database here
+    console.log("Early access signup:", body)
 
-      return NextResponse.json({ error: "Failed to save payment info" }, { status: 500 })
-    }
-
+    // Mock successful response
     return NextResponse.json({
       success: true,
-      data,
+      data: {
+        id: Math.random().toString(36).substr(2, 9),
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        company: company,
+        job_title: jobTitle,
+        payment_status: "completed",
+        created_at: new Date().toISOString(),
+      },
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error("Payment error:", error)
     return NextResponse.json({ error: "Payment processing failed" }, { status: 500 })
   }

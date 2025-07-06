@@ -167,6 +167,26 @@ export default function LandingPage() {
           </div>
 
           <DemoSection />
+
+          {/* Get Started CTA Section */}
+          <div className="mt-16 bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl border-2 border-gray-200 max-w-4xl mx-auto text-center">
+            <h3 className="text-2xl font-semibold mb-4" style={{ color: "#182654" }}>
+              Get Started with eryn
+            </h3>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Sign up now to access our free salary aging calculator and discover how market forces affect compensation
+              over time. Get instant insights and explore our full benchmarking platform.
+            </p>
+            <Link
+              href="https://erynbenchmark-git-main-jeremy-erynais-projects.vercel.app/signup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block font-semibold uppercase tracking-wide px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              style={{ backgroundColor: "#2483A1", color: "white" }}
+            >
+              Sign Up & Start Calculating
+            </Link>
+          </div>
         </div>
       </section>
 

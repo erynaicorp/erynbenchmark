@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, CheckCircle, Lock } from "lucide-react"
+import { ArrowLeft, CheckCircle } from "lucide-react"
 
 export default function EarlyAccessPage() {
   const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ export default function EarlyAccessPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -31,7 +32,7 @@ export default function EarlyAccessPage() {
     setError("")
 
     try {
-      const response = await fetch("/api/create-checkout-session", {
+      const response = await fetch("/api/early-access", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +40,6 @@ export default function EarlyAccessPage() {
         body: JSON.stringify(formData),
       })
 
-      // SAFELY read the response: JSON if possible, text otherwise
       const contentType = response.headers.get("content-type") ?? ""
       const data = contentType.includes("application/json") ? await response.json() : { error: await response.text() }
 
@@ -47,25 +47,41 @@ export default function EarlyAccessPage() {
         throw new Error(data.error ?? "Request failed")
       }
 
-      // Redirect to Stripe Checkout
-      const stripe = (await import("@stripe/stripe-js")).loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
-
-      const stripeInstance = await stripe
-      if (stripeInstance) {
-        const { error } = await stripeInstance.redirectToCheckout({
-          sessionId: data.sessionId,
-        })
-
-        if (error) {
-          throw new Error(error.message)
-        }
-      }
+      setSuccess(true)
     } catch (error: any) {
       console.error("Error submitting form:", error)
-      setError(error.message || "There was an error processing your payment. Please try again.")
+      setError(error.message || "There was an error processing your request. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  if (success) {
+    return (
+      <main className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#f8fafc" }}>
+        <div className="max-w-md w-full mx-4">
+          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+            <div className="mb-6">
+              <CheckCircle className="w-16 h-16 mx-auto" style={{ color: "#31E2EF" }} />
+            </div>
+            <h1 className="text-2xl font-bold mb-4" style={{ color: "#182654" }}>
+              Thank You for Your Interest!
+            </h1>
+            <p className="text-gray-600 mb-6">
+              We've received your early access request. Our team will be in touch soon with next steps and access
+              details.
+            </p>
+            <Link
+              href="/"
+              className="inline-block font-semibold uppercase tracking-wide px-8 py-3 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              style={{ backgroundColor: "#31E2EF", color: "#182654" }}
+            >
+              Back to Home
+            </Link>
+          </div>
+        </div>
+      </main>
+    )
   }
 
   return (
@@ -88,7 +104,8 @@ export default function EarlyAccessPage() {
               Get Early Access to eryn Premium
             </h1>
             <p className="text-xl text-gray-600 max-w-lg mx-auto mb-6">
-              Secure your spot and get immediate access to all premium features when we launch.
+              Join our exclusive early access program and be among the first to experience premium compensation
+              benchmarking.
             </p>
             <div className="bg-white rounded-xl p-6 shadow-sm border-2" style={{ borderColor: "#31E2EF" }}>
               <div className="flex items-center justify-center gap-4 mb-4">
@@ -100,7 +117,7 @@ export default function EarlyAccessPage() {
                   Early Access
                 </div>
               </div>
-              <p className="text-sm text-gray-600">Cancel anytime • Priority support</p>
+              <p className="text-sm text-gray-600">Priority access • Premium support</p>
             </div>
           </div>
 
@@ -202,18 +219,6 @@ export default function EarlyAccessPage() {
                 </div>
               </div>
 
-              {/* Security Notice */}
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div className="flex items-center gap-2 mb-2">
-                  <Lock className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-700">Secure Payment with Stripe</span>
-                </div>
-                <p className="text-xs text-gray-600">
-                  Your payment will be processed securely by Stripe. You'll be redirected to complete your payment with
-                  credit card details.
-                </p>
-              </div>
-
               {/* Submit Button */}
               <div className="pt-4">
                 <button
@@ -222,58 +227,17 @@ export default function EarlyAccessPage() {
                   className="w-full font-semibold uppercase tracking-wide px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   style={{ backgroundColor: "#31E2EF", color: "#182654" }}
                 >
-                  {isSubmitting ? "Redirecting to Payment..." : "Continue to Payment - $99/month"}
+                  {isSubmitting ? "Submitting..." : "Request Early Access"}
                 </button>
               </div>
 
               {/* Terms */}
               <div className="text-center">
                 <p className="text-xs text-gray-500">
-                  By proceeding, you agree to our{" "}
-                  <Link href="#" className="underline hover:text-gray-700">
-                    Terms of Service
-                  </Link>{" "}
-                  and{" "}
-                  <Link href="#" className="underline hover:text-gray-700">
-                    Privacy Policy
-                  </Link>
-                  . You can cancel anytime.
+                  By submitting, you agree to be contacted about eryn Premium early access.
                 </p>
               </div>
             </form>
-          </div>
-
-          {/* Features Reminder */}
-          <div className="mt-12 bg-white rounded-2xl shadow-lg p-8">
-            <h3 className="text-xl font-semibold mb-6 text-center" style={{ color: "#182654" }}>
-              What You Get with Early Access
-            </h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">Immediate access to all premium features</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">Priority customer support</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">Advanced AI-powered job matching</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">Full access to all job levels and filters</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">Report exports and integrations</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#31E2EF" }} />
-                <span className="text-sm text-gray-600">Exclusive beta features access</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
